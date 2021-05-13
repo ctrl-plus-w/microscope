@@ -22,20 +22,30 @@ const Microscope = ({ images = [], rotation = 0 }) => {
         const index = Math.floor(rotation / sectionDeg);
 
         const curr = i === index;
+        const next = i - 1 === index;
 
         const getVisibility = () => {
-          return curr ? 'visible' : 'hidden';
+          if (curr || next) return 'visible';
+          return 'hidden';
         };
 
         const getRotation = () => {
-          return curr ? `rotate(${sectionPercent * sectionDeg}deg)` : '';
+          if (curr) return `rotate(${sectionPercent * sectionDeg}deg)`;
+          if (next) return `rotate(${sectionPercent * sectionDeg - sectionDeg}deg)`;
+
+          return '';
+        };
+
+        const getOpacity = () => {
+          if (next) return parseFloat(sectionPercent.toFixed(1));
+          return 1;
         };
 
         const style = {
           zIndex: 10 + i,
           visibility: getVisibility(),
           transform: getRotation(),
-          opacity: 1,
+          opacity: getOpacity(),
         };
 
         return <img className={`img ${curr ? 'yes' : ''}`} style={{ ...style }} src={image} key={i} alt='' />;
