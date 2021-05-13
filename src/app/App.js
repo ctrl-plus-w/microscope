@@ -8,6 +8,7 @@ import { Draggable } from 'gsap/Draggable';
 // Components
 import Microscope from '../components/Microscope';
 import Wheel from '../components/Wheel';
+import Overlay from '../components/Overlay';
 
 // Assets
 import bcp from '../assets/img/bcp_490_x36';
@@ -34,6 +35,7 @@ const App = () => {
     <div className='container'>
       <div className='content'>
         <div className='microscope-container'>
+          <Overlay name='plane polarised light' />
           <Wheel />
           <Microscope images={ppl} rotation={rotation} />
         </div>
@@ -41,6 +43,7 @@ const App = () => {
         <p className='degrees'>{Math.round(rotation)}°</p>
 
         <div className='microscope-container'>
+          <Overlay name='between crossed polars' />
           <Wheel />
           <Microscope images={bcp} rotation={rotation} />
         </div>
